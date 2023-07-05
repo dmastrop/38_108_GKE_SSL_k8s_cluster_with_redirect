@@ -1,0 +1,27 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+# this is a new resource required for Google managed certificates
+# this is a custom resource
+metadata:
+  name: managed-cert-for-ingress
+  # this name is linked to the Ingress-SSL.yaml file
+spec:
+  domains:
+  # 100 domains max and wildcard domains are NOT supported
+    #- demo1.kalyanreddydaida.com
+    - demo1.cloudnetworktesting.com
+    # there will be no org information in this type of cert that will be generated.
+    # these certs are less flexible than certs we obain and manage ourself.
+    # does not support wildcard domains (example *.stacksimpify.com)
+    # supports 100 non-wildcard domains.  Thus better for smaller companies.
+    # domain name length only supported up to 64 bytes (less than the 253 bytes that are supported on internet)
+
+    # additional notes:
+    #- Google Managed Certificates for GKE Ingress
+    #- Ingress SSL only
+    #- Certificate Validity: 90 days
+    #- 30 days before expiry google starts renewal process. We dont need to worry about it.
+    #- **Important Note:** Google-managed certificates are only supported with GKE Ingress 
+    # using the external HTTP(S) load balancer. Google-managed certificates do not support third-party Ingress controllers.
+    # so nginx ingress controller is NOT supported with these (Grider setup requires real SSL certs)
+    # These are only supported with: kubernetes.io/ingress.class: "gce"

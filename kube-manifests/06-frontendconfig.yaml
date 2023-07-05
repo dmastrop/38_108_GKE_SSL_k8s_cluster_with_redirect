@@ -1,0 +1,9 @@
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: my-frontend-config
+  # this name is referenced in annotations in the ingress-ssl.yaml
+spec:
+  redirectToHttps:
+    enabled: true
+    #responseCodeName: RESPONSE_CODE
